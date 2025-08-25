@@ -1,0 +1,11 @@
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 2
+combine_as_imports = true
+use_parentheses = true
+
+known_first_party = "core,fighters,"
+known_third_party = "django,rest_framework"
+sections = "FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
