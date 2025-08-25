@@ -1,6 +1,6 @@
 {
   "name": "Rinha DevContainer",
-  "dockerComposeFile": ["../docker-compose.yml"],
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
   "service": "backend",
   "runServices": ["backend", "db"],
   "workspaceFolder": "/app",
@@ -21,7 +21,8 @@
         "ms-python.python",
         "ms-python.vscode-pylance",
         "ms-python.vscode-python-envs",
-        "naumovs.color-highlight"
+        "naumovs.color-highlight",
+        "redhat.vscode-yaml"
       ]
     }
   }

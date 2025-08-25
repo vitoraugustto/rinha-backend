@@ -3,7 +3,6 @@ services:
   backend:
     build: .
     image: rinha:1.0.0
-    container_name: django_backend
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
@@ -12,12 +11,8 @@ services:
 
   db:
     image: postgres:17.6
-    container_name: postgres_database
     restart: unless-stopped
-    environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypass
-      POSTGRES_DB: mydb
+    env_file: .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
