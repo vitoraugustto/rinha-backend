@@ -3,6 +3,7 @@ services:
   backend:
     build: .
     image: rinha:1.0.0
+    env_file: .env
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app

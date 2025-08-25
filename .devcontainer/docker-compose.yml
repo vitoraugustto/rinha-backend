@@ -1,4 +1,7 @@
 services:
+  backend:
+    env_file: .devcontainer/devcontainer.env
+
   db:
     env_file: .devcontainer/devcontainer.env
 
