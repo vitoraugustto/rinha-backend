@@ -1,7 +1,4 @@
-version: '3.8'
 services:
-  backend:
-    volumes:
-      - ..:/workspaces:cached
-    command: sleep infinity
- 
+  db:
+    env_file: .devcontainer/devcontainer.env
+

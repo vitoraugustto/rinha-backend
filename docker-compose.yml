@@ -1,10 +1,22 @@
+name: rinha
 services:
   backend:
     build: .
-    image: rinha-backend
-    container_name: django_backend
+    image: rinha:1.0.0
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
       - "8000:8000"
+
+  db:
+    image: postgres:17.6
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
