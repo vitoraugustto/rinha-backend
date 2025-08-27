@@ -18,17 +18,6 @@ services:
         - "traefik.http.middlewares.api-ratelimit.ratelimit.average=3"
         - "traefik.http.middlewares.api-ratelimit.ratelimit.burst=10"
         - "traefik.http.routers.api.middlewares=api-ratelimit"
-    depends_on:
-      - db
-
-  db:
-    image: postgres:17.6
-    restart: unless-stopped
-    env_file: .env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
   traefik:
     image: "traefik:v3.5"
@@ -50,6 +39,4 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     depends_on:
       - api
-
-volumes:
-  postgres_data:
+      
