@@ -1,6 +1,8 @@
 services:
-  backend:
+  api:
     env_file: .devcontainer/devcontainer.env
+    deploy:
+      replicas: 2
 
   db:
     env_file: .devcontainer/devcontainer.env

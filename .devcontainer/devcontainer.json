@@ -1,8 +1,8 @@
 {
   "name": "Rinha DevContainer",
   "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
-  "service": "backend",
-  "runServices": ["backend", "db"],
+  "service": "api",
+  "runServices": ["db", "traefik"],
   "workspaceFolder": "/app",
   "customizations": {
     "vscode": { 
