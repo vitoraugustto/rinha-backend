@@ -6,11 +6,13 @@ services:
     image: rinha:1.0.0
     env_file: .env
     command: python manage.py runserver 0.0.0.0:8000
+    deploy:
+      replicas: 2
     volumes:
       - .:/app
     labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.api.rule=Host(`api.rinha.localhost`)"
+        - "traefik.http.routers.api.rule=Host(`${API_HOST}`)"
         - "traefik.http.routers.api.entrypoints=web"
         - "traefik.http.services.api.loadbalancer.server.port=8000"
         - "traefik.http.middlewares.api-ratelimit.ratelimit.average=3"
@@ -31,6 +33,7 @@ services:
   traefik:
     image: "traefik:v3.5"
     container_name: "traefik"
+    env_file: .env
     command:
       - "--api.insecure=true"
       - "--providers.docker=true"
@@ -40,7 +43,7 @@ services:
       - "80:80"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.rinha.localhost`)"
+      - "traefik.http.routers.traefik.rule=Host(`${TRAEFIK_HOST}`)"
       - "traefik.http.routers.traefik.entrypoints=web"
       - "traefik.http.routers.traefik.service=api@internal"
     volumes:

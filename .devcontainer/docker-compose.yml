@@ -2,8 +2,20 @@ services:
   api:
     env_file: .devcontainer/devcontainer.env
     deploy:
-      replicas: 2
+      replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`${API_HOST}`)"
+      - "traefik.http.routers.api.entrypoints=web"
+      - "traefik.http.services.api.loadbalancer.server.port=8000"
 
   db:
     env_file: .devcontainer/devcontainer.env
 
+  traefik:
+    env_file: .devcontainer/devcontainer.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`${TRAEFIK_HOST}`)"
+      - "traefik.http.routers.traefik.entrypoints=web"
+      - "traefik.http.routers.traefik.service=api@internal"
