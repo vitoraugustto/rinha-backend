@@ -13,6 +13,9 @@ services:
         - "traefik.http.routers.api.rule=Host(`api.rinha.localhost`)"
         - "traefik.http.routers.api.entrypoints=web"
         - "traefik.http.services.api.loadbalancer.server.port=8000"
+        - "traefik.http.middlewares.api-ratelimit.ratelimit.average=3"
+        - "traefik.http.middlewares.api-ratelimit.ratelimit.burst=10"
+        - "traefik.http.routers.api.middlewares=api-ratelimit"
     depends_on:
       - db
 
