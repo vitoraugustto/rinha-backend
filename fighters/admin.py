@@ -4,22 +4,46 @@ from django.db import models
 
 from .models import (
     Fighter,
+    Occupation,
     Trait,
 )
 
 
 class TraitAdmin(admin.ModelAdmin):
-    list_display = ("__str__", "description")
+    list_display = ("name", "description")
+
+    search_fields = (
+        "name",
+        "description",
+    )
+
+
+class OccupationAdmin(admin.ModelAdmin):
+    list_display = ("name", "description")
+
+    search_fields = (
+        "name",
+        "description",
+    )
 
 
 class FighterAdmin(admin.ModelAdmin):
-    list_display = ("__str__", "description", "age", "height", "weight")
+    list_display = ("name", "biography", "age", "height", "weight")
     filter_horizontal = ("traits",)
+    search_fields = (
+        "name",
+        "biography",
+    )
+
+    autocomplete_fields = (
+        "occupation",
+        "traits",
+    )
 
     fieldsets = (
-        ("Basic Information", {"fields": ("name", "description", "age")}),
-        ("Attributes", {"fields": ("height", "weight")}),
-        ("Traits", {"fields": ("traits",)}),
+        ("Identity", {"fields": ("name", "biography")}),
+        ("Biological Stats", {"fields": ("age", "height", "weight")}),
+        ("Profile", {"fields": ("occupation", "traits")}),
     )
 
     formfield_overrides = {
@@ -33,3 +57,4 @@ class FighterAdmin(admin.ModelAdmin):
 
 admin.site.register(Trait, TraitAdmin)
 admin.site.register(Fighter, FighterAdmin)
+admin.site.register(Occupation, OccupationAdmin)
