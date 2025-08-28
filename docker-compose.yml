@@ -5,9 +5,9 @@ services:
     build: .
     image: rinha:1.0.0
     env_file: .env
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn core.wsgi --bind 0.0.0.0:8000
     deploy:
-      replicas: 2
+      replicas: 1
     volumes:
       - .:/app
     labels:
