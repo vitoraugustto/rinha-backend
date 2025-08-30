@@ -24,6 +24,7 @@ class Arena(models.Model):
 
 
 class Match(models.Model):
+    title = models.CharField(max_length=100, help_text="The title of the match")
     arena = models.ForeignKey(
         Arena,
         on_delete=models.CASCADE,
