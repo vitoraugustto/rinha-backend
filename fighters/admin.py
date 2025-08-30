@@ -29,11 +29,7 @@ class OccupationAdmin(admin.ModelAdmin):
 
 class FighterAdmin(admin.ModelAdmin):
     list_display = ("name", "biography", "age", "height", "weight")
-    filter_horizontal = ("traits",)
-    search_fields = (
-        "name",
-        "biography",
-    )
+    search_fields = ("name", "biography")
 
     autocomplete_fields = (
         "occupation",
