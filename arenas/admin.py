@@ -42,6 +42,7 @@ class RoundInline(admin.TabularInline):
 
 class MatchAdmin(admin.ModelAdmin):
     list_display = (
+        "title",
         "arena",
         "get_fighters",
         "max_number_of_rounds",
@@ -51,7 +52,7 @@ class MatchAdmin(admin.ModelAdmin):
     autocomplete_fields = ("fighters",)
     inlines = [RoundInline]
 
-    fieldsets = (("MATCH INFORMATION", {"fields": ("arena", "fighters")}),)
+    fieldsets = (("MATCH INFORMATION", {"fields": ("title", "arena", "fighters")}),)
 
     def get_inline_instances(self, request, obj=None):
         if obj is None:
@@ -83,8 +84,8 @@ class RoundAdmin(admin.ModelAdmin):
 
 
 class MatchResultAdmin(admin.ModelAdmin):
-    list_display = ("match", "result_type", "winner")
-    list_filter = ("result_type", "winner")
+    list_display = ("match", "outcome", "winner")
+    list_filter = ("outcome", "winner")
 
     def has_add_permission(self, request):
         return False
@@ -95,7 +96,7 @@ class MatchResultAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             "MATCH RESULT INFORMATION",
-            {"fields": ("match", "result_type", "winner", "description")},
+            {"fields": ("match", "outcome", "winner", "description")},
         ),
     )
 

@@ -43,7 +43,7 @@ class Match(models.Model):
 
     def __str__(self):
         # pylint: disable=no-member
-        return f"{self.arena} - {' vs '.join(str(fighter) for fighter in self.fighters.all())}"
+        return f"{self.title} - {' vs '.join(str(fighter) for fighter in self.fighters.all())}"
 
     class Meta:
         verbose_name = "Match"
@@ -51,7 +51,7 @@ class Match(models.Model):
 
 
 class MatchResult(models.Model):
-    RESULT_TYPE_CHOICES = [
+    OUTCOME_CHOICES = [
         ("win", "Win"),
         ("draw", "Draw"),
     ]
@@ -62,10 +62,10 @@ class MatchResult(models.Model):
         related_name="result",
         help_text="The match this result belongs to",
     )
-    result_type = models.CharField(
+    outcome = models.CharField(
         max_length=20,
-        choices=RESULT_TYPE_CHOICES,
-        help_text="The result type of the match",
+        choices=OUTCOME_CHOICES,
+        help_text="The outcome of the match",
     )
     winner = models.ForeignKey(
         Fighter,
